@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>ArcGIS API for JavaScript Tutorials: Display a map</title>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+<!-- Calls the map address and the javascript library-->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.18/"></script>
+
+    <script>
+        //adds the modules
+      require(["esri/config","esri/Map", "esri/views/MapView"], function (esriConfig,Map, MapView) {
+            // sets the api key
+        esriConfig.apiKey = "AAPK85fc2effba54461c9853fd4bf0282a639PCaZoMsAvvnIL4TnE94ISos03sHSYSqc2S3921vVW-kET2pYkQMtZOo-ModrukJ";
+        //calls the map function
+        const map = new Map({
+          basemap: "arcgis-topographic" // Basemap layer service
+        });
+        //sets the map view
+        const view = new MapView({
+          map: map,
+          center: [-78.500806, 45.648583], // Longitude, latitude WHO IN THE HECK DOES LONG THEN LAT
+          zoom: 16, // Zoom level
+          container: "viewDiv" // Div element
+        });
+
+        const graphicsLayer = new GraphicsLayer();
+        map.add(graphicsLayer);
+
+        const point = { //Create a point
+            type: "point",
+            longitude: -78.500806, 
+            latitude: 45.648583
+        };
+        const simpleMarkerSymbol = {
+            type: "simple-marker",
+            color: [226, 119, 40],  // Orange
+            outline: {
+                color: [255, 255, 255], // White
+                width: 1
+            }
+        };
+
+        const pointGraphic = new Graphic({
+            geometry: point,
+            symbol: simpleMarkerSymbol
+        });
+        graphicsLayer.add(pointGraphic);
+
+      });
+    </script>
+
+  </head>
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>
