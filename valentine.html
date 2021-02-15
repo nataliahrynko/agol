@@ -1,69 +1,195 @@
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>ArcGIS API for JavaScript Tutorials: Display a map</title>
-
-    <style>
-      html,
-      body,
-      #viewDiv {
-        padding: 0;
-        margin: 0;
-        height: 100%;
-        width: 100%;
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>First Adventure</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+  <style>
+    #viewDiv {
+      height: 70%; 
+      width :70%;
+       margin-left:auto; 
+       margin-right:auto;
+    }
+      *{
+      font: Century Gothic, CenturyGothic, AppleGothic, sans-serif; 
       }
-    </style>
+      body {
+        background-color: #9c8b707e;
+        color:black;
+        text-align: center;
 
-<!-- Calls the map address and the javascript library-->
-    <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css">
-    <script src="https://js.arcgis.com/4.18/"></script>
+      }
+      h {
+        font-size: 50px;
+        color:white
+      }
+      h1 {
+        font-size:large;
+        color:   rgb(168, 92, 152);
+        font-weight: bold;
+      }
+      h2 {
+        font-size:large;
+        color: rgb(168, 92, 152);
+        font-weight: bold;
+        margin: 20px
+      }
+      p {
+        font-size:medium;
+        padding-bottom: 20px;
+      }
+  </style>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.18/"></script>
+  <script>
 
-    <script>
-        //adds the modules
-      require(["esri/config","esri/Map", "esri/views/MapView"], function (esriConfig,Map, MapView) {
-            // sets the api key
-        esriConfig.apiKey = "AAPK85fc2effba54461c9853fd4bf0282a639PCaZoMsAvvnIL4TnE94ISos03sHSYSqc2S3921vVW-kET2pYkQMtZOo-ModrukJ";
-        //calls the map function
-        const map = new Map({
-          basemap: "arcgis-topographic" // Basemap layer service
-        });
-        //sets the map view
-        const view = new MapView({
-          map: map,
-          center: [-78.500806, 45.648583], // Longitude, latitude WHO IN THE HECK DOES LONG THEN LAT
-          zoom: 16, // Zoom level
-          container: "viewDiv" // Div element
-        });
+  require([
+    "esri/config",
+    "esri/Map",
+    "esri/views/MapView",
 
-        const graphicsLayer = new GraphicsLayer();
-        map.add(graphicsLayer);
 
-        const point = { //Create a point
-            type: "point",
-            longitude: -78.500806, 
-            latitude: 45.648583
-        };
-        const simpleMarkerSymbol = {
-            type: "simple-marker",
-            color: [226, 119, 40],  // Orange
-            outline: {
-                color: [255, 255, 255], // White
-                width: 1
-            }
-        };
+    "esri/Graphic",
+    "esri/layers/GraphicsLayer"
 
-        const pointGraphic = new Graphic({
-            geometry: point,
-            symbol: simpleMarkerSymbol
-        });
-        graphicsLayer.add(pointGraphic);
+    ], function(esriConfig,Map, MapView, Graphic, GraphicsLayer) {
 
-      });
-    </script>
+  esriConfig.apiKey = "AAPK85fc2effba54461c9853fd4bf0282a639PCaZoMsAvvnIL4TnE94ISos03sHSYSqc2S3921vVW-kET2pYkQMtZOo-ModrukJ";
 
-  </head>
-  <body>
-    <div id="viewDiv"></div>
-  </body>
+  const map = new Map({
+    basemap: "arcgis-imagery" //Basemap layer service
+  });
+
+  const view = new MapView({
+    map: map,
+    center: [-78.5277977 ,  45.6177324], //Longitude, latitude
+    zoom: 13,
+    container: "viewDiv"
+ });
+
+ const graphicsLayer = new GraphicsLayer();
+ map.add(graphicsLayer);
+
+
+    // Create a line geometry
+
+    const polyline = {
+    type: "polyline",
+    paths: [
+    [-78.498843 , 45.642952],
+    [-78.500806, 45.648583],
+
+    ]
+ };
+ const simpleLineSymbol2 = {
+    type: "simple-line",
+    color: [255,192,203], // Pink
+    width: 2
+ };
+
+ const polylineGraphic2 = new Graphic({
+    geometry: polyline,
+    symbol: simpleLineSymbol2
+ });
+ graphicsLayer.add(polylineGraphic2);
+ const canoe = {
+    type: "polyline",
+    paths: [
+        [ -78.520505 ,  45.5919711  ],
+        [ -78.5242172 ,  45.5947339  ],
+        [ -78.522286 ,  45.5976766  ],
+        [ -78.5216179 ,  45.6004101  ],
+        [ -78.5237636 ,  45.603893  ],
+        [ -78.5282268 ,  45.6060247  ],
+        [ -78.5295572 ,  45.6072856  ],
+        [ -78.526124 ,  45.6129896  ],
+        [ -78.5255661 ,  45.6158714  ],
+        [ -78.5277977 ,  45.6177324  ],
+        [ -78.5317459 ,  45.6194434  ],
+        [ -78.5315742 ,  45.6225049  ],
+        [ -78.5316171 ,  45.6246959  ],
+        [ -78.5292139 ,  45.6281173  ],
+        [ -78.5293748 ,  45.6304131  ],
+        [ -78.5245897 ,  45.6314784  ],
+        [ -78.5212423 ,  45.6344343  ],
+        [ -78.5174658 ,  45.6355596  ],
+        [ -78.5157063 ,  45.6358296  ],
+        [ -78.5166504 ,  45.6381702  ],
+        [ -78.5165646 ,  45.6394304  ],
+        [ -78.5141399 ,  45.6391003  ],
+        [ -78.5104491 ,  45.6366248  ],
+        [ -78.5087325 ,  45.6382602  ],
+        [ -78.5051276 ,  45.6382152  ],
+        [ -78.5033466 ,  45.6404656  ],
+        [ -78.5003426 ,  45.6420258  ],
+        [ -78.4984328 ,  45.6427459  ],
+        [ -78.498843 , 45.642952],
+    ]
+ };
+ const simpleLineSymbol = {
+    type: "simple-line",
+    color: [0, 0, 255], // Blue
+    width: 2
+ };
+
+ const polylineGraphic = new Graphic({
+    geometry: canoe,
+    symbol: simpleLineSymbol
+ });
+
+ graphicsLayer.add(polylineGraphic);
+ const point = { //Create a point
+    type: "point",
+    longitude: -78.500806, 
+    latitude: 45.648583
+ };
+ const simpleMarkerSymbol = {
+    type: "simple-marker",
+    color: [231, 84, 128],  // Light Pink
+    outline: {
+        color: [255,192,203], // Pink
+        width: 1
+    }
+ };
+
+ const pointGraphic = new Graphic({
+    geometry: point,
+    symbol: simpleMarkerSymbol
+ });
+ graphicsLayer.add(pointGraphic);
+
+
+ });
+</script>
+</head>
+<body>
+  <div id="container-fluid">
+    <h1>First Adventure</h1>
+  </div>
+  <div id="container">
+    <h2>Adventures at the Algonquin Wildlife Research Station</h2>
+    <p>I met my partner at the AWRs while working on the Small Mammal Project. At one point in 
+      the summer during a day off, we treked to the infamous (among past researchers) peak Baldy.
+      It was a lot of pulling the canoe over rocks, hacking at alder through small deep creeks and 
+      a constant struggle to not get eaten alive by bugs but by 3pm we had made it to the top of 
+      the 550m peak. Lots of fun and a trip I look back at fondly. The map shows the canoe route in 
+      blue and the hike up the steep 200m cliff to the oak covered peak (oak is not as common as one would think in the
+      park).
+    </p>
+    </div>
+    <p>
+  <div id="viewDiv"></div></p>
+
+
+</body>
 </html>
