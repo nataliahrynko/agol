@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>ArcGIS API for JavaScript Tutorials: Add a point, line, and polygon</title>
+  <title>Scales Nature Park</title>
   <style>
     html, body, #viewDiv {
       padding: 0;
@@ -34,7 +34,7 @@
 
   const view = new MapView({
     map: map,
-    center: [-118.80500,34.02700], //Longitude, latitude
+    center: [-79.440464, 44.561897], //Longitude, latitude
     zoom: 13,
     container: "viewDiv"
  });
@@ -44,12 +44,12 @@
 
  const point = { //Create a point
     type: "point",
-    longitude: -118.80657463861,
-    latitude: 34.0005930608889
+    longitude: -79.440464,
+    latitude: 44.561897
  };
  const simpleMarkerSymbol = {
     type: "simple-marker",
-    color: [226, 119, 40],  // Orange
+    color: [0, 255, 0],  // Green
     outline: {
         color: [255, 255, 255], // White
         width: 1
